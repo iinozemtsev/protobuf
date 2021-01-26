@@ -1,0 +1,7 @@
+name: Override protobuf dependency
+description: 'Overrides protobuf dependency with a local path'
+runs:
+  using: "composite"
+  steps:
+    - run: "$GITHUB_ACTION_PATH/script.sh"
+      shell: bash

@@ -1,0 +1,29 @@
+name: Dart
+
+on:
+  # Run CI on pushes to the master branch, and on PRs against master.
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    strategy: matrix:
+      sdk: [stable, dev]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cedx/setup-dart@v2
+        with:
+          release-channel: ${{ matrix.sdk }}
+      - name: Report version
+        run: dart --version
+      - uses: ./.github/actions/install-protoc
+      - uses: ./.github/actions/override-proto-dep
+      - uses: ./.github/actions/run-travis-sh
+        with:
+          packages: "protobuf"
+          args: "dartanalyzer_0"

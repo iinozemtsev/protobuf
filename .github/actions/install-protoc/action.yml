@@ -1,0 +1,7 @@
+name: Install protoc
+description: 'Downloads and unpacks protoc plugin and adds it to the path'
+runs:
+  using: "composite"
+  steps:
+    - run: "$GITHUB_ACTION_PATH/script.sh"
+      shell: bash

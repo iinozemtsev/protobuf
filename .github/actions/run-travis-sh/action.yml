@@ -1,0 +1,18 @@
+name: 'Run tools/travis.sh'
+description: 'Runs tools/travis.sh with arguments from inputs'
+inputs:
+  packages:
+    description: 'Packages to run command on'
+    required: true
+  args:
+    description: 'args for travis.sh'
+    required: true
+    
+runs:
+  using: 'composite'
+  steps:
+    - name: "tool/script.sh ${{ inputs.args }}"
+      run: "tool/script.sh ${{ inputs.args }}"
+      shell: bash
+  env:
+    PKGS: "${{ inputs.packages }}"
